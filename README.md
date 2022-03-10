@@ -14,7 +14,8 @@ Our [Swarm Satellite Arduino Library](https://github.com/sparkfun/SparkFun_Swarm
 
 ## Repository Contents
 
-- [**/Hardware**](./Hardware) - Eagle PCB, SCH and LBR design files
+- [**/Hardware**](./Hardware) - contains the Eagle PCB, SCH and LBR design files
+- [**/Documents**](./Documents) - contains the datasheet etc. for the Swarm M138
 - [**LICENSE.md**](./LICENSE.md) - contains the licence information
 
 ## Product Versions
