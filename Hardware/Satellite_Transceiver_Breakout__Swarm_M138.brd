@@ -12750,10 +12750,10 @@ These are the minimums &lt;a href=&quot;https://jlcpcb.com/capabilities/Capabili
 <attribute name="PROD_ID" value="CONN-16558" x="17.78" y="26.67" size="1.778" layer="27" ratio="15" display="off"/>
 <attribute name="VALUE" x="17.78" y="25.781" size="0.762" layer="27" align="center"/>
 </element>
-<element name="U3" library="SparkFun-IC-Power" package="SOT23-5" value="STLQ015-3.3V" x="5.08" y="8.255" smashed="yes" rot="R90">
+<element name="U3" library="SparkFun-IC-Power" package="SOT23-5" value="3.3V" x="5.08" y="8.255" smashed="yes" rot="R90">
 <attribute name="NAME" x="2.921" y="6.477" size="0.6096" layer="25" ratio="20" rot="R90"/>
-<attribute name="PROD_ID" value="IC-15779" x="5.08" y="8.255" size="1.778" layer="27" ratio="15" rot="R90" display="off"/>
-<attribute name="VALUE" x="7.874" y="6.477" size="0.6096" layer="27" ratio="20" rot="R90"/>
+<attribute name="PROD_ID" value="VREG-12457" x="5.08" y="8.255" size="1.778" layer="27" ratio="15" rot="R90" display="off"/>
+<attribute name="VALUE" value="3.3V" x="7.874" y="6.477" size="0.6096" layer="27" ratio="20" rot="R90"/>
 </element>
 <element name="C8" library="SparkFun-Capacitors" package="0603" value="1.0uF" x="1.905" y="8.255" smashed="yes" rot="R90">
 <attribute name="NAME" x="1.143" y="8.255" size="0.6096" layer="25" font="vector" ratio="20" rot="R90" align="bottom-center"/>

@@ -8666,27 +8666,44 @@ You are welcome to use this library for commercial purposes. For attribution, we
 </device>
 </devices>
 </deviceset>
-<deviceset name="STLQ015" prefix="U">
-<description>&lt;h3&gt;STLQ015 - 150mA CMOS LDO Regulator w/ Enable&lt;/h3&gt;
-
-1.4uA quiescent
+<deviceset name="V_REG_AP2112" prefix="U">
+<description>&lt;h3&gt;AP2112 - 600mA CMOS LDO Regulator w/ Enable&lt;/h3&gt;
+&lt;p&gt;The AP2112 is CMOS process low dropout linear regulator with enable function, the regulator delivers a guaranteed 600mA (min.) continuous load current.&lt;/p&gt;
+&lt;p&gt;Features&lt;br&gt;
+&lt;ul&gt;
+&lt;li&gt;Output Voltage Accuracy: ±1.5% &lt;/li&gt;
+&lt;li&gt;Output Current: 600mA (Min.) &lt;/li&gt;
+&lt;li&gt;Foldback Short Current Protection: 50mA &lt;/li&gt;
+&lt;li&gt;Enable Function to Turn ON/OFF VOUT&lt;/li&gt;
+&lt;li&gt;Low Dropout Voltage (3.3V): 250mV (Typ.) @IOUT=600mA &lt;/li&gt;
+&lt;li&gt;Excellent Load Regulation: 0.2%/A (Typ.) &lt;/li&gt;
+&lt;li&gt;Excellent Line Regulation: 0.02%/V (Typ.) &lt;/li&gt;
+&lt;li&gt;Low Quiescent Current: 55μA (Typ.)&lt;/li&gt;
+&lt;li&gt;Low Standby Current: 0.01μA (Typ.)&lt;/li&gt;
+&lt;li&gt;Low Output Noise: 50μVRMS &lt;/li&gt;
+&lt;li&gt;PSRR: 100Hz -65dB, 1kHz -65dB &lt;/li&gt;
+&lt;li&gt; OTSD Protection &lt;/li&gt;
+&lt;li&gt;Stable  with  1.0μF Flexible Cap: Ceramic, Tantalum and Aluminum Electrolytic &lt;/li&gt;
+&lt;li&gt;Operation Temperature Range: -40°C to 85°C &lt;/li&gt;
+&lt;li&gt;ESD: MM 400V, HBM 4000V&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/p&gt;</description>
 <gates>
-<gate name="U1" symbol="V-REG-LDO_NO-BP" x="0" y="0"/>
+<gate name="G$1" symbol="V-REG-LDO_NO-BP" x="0" y="0"/>
 </gates>
 <devices>
-<device name="-3.3V" package="SOT23-5">
+<device name="K-3.3V" package="SOT23-5">
 <connects>
-<connect gate="U1" pin="EN" pad="3"/>
-<connect gate="U1" pin="GND" pad="2"/>
-<connect gate="U1" pin="IN" pad="1"/>
-<connect gate="U1" pin="NC" pad="4"/>
-<connect gate="U1" pin="OUT" pad="5"/>
+<connect gate="G$1" pin="EN" pad="3"/>
+<connect gate="G$1" pin="GND" pad="2"/>
+<connect gate="G$1" pin="IN" pad="1"/>
+<connect gate="G$1" pin="NC" pad="4"/>
+<connect gate="G$1" pin="OUT" pad="5"/>
 </connects>
 <technologies>
 <technology name="">
-<attribute name="PROD_ID" value="IC-15779"/>
+<attribute name="PROD_ID" value="VREG-12457"/>
+<attribute name="VALUE" value="3.3V"/>
 </technology>
 </technologies>
 </device>
@@ -12828,7 +12845,7 @@ Why hasn't anyone added the cutout polygons directly to the connector footprint?
 <part name="C4" library="SparkFun-Capacitors" deviceset="100UF-POLAR" device="-25V-20%(ELEC)" value="100uF"/>
 <part name="C5" library="SparkFun-Capacitors" deviceset="100UF-POLAR" device="-25V-20%(ELEC)" value="100uF"/>
 <part name="U2" library="Swarm" deviceset="SWARM_M138_TRANSCEIVER" device="_MAIN"/>
-<part name="U3" library="SparkFun-IC-Power" deviceset="STLQ015" device="-3.3V"/>
+<part name="U3" library="SparkFun-IC-Power" deviceset="V_REG_AP2112" device="K-3.3V" value="3.3V"/>
 <part name="SUPPLY14" library="SparkFun-PowerSymbols" deviceset="VCC" device=""/>
 <part name="GND12" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="SUPPLY17" library="SparkFun-PowerSymbols" deviceset="3.3V" device=""/>
@@ -12918,10 +12935,11 @@ Peak USB current draw is 600mA</text>
 <wire x1="312.42" y1="114.3" x2="431.8" y2="114.3" width="0.1524" layer="97" style="longdash"/>
 <text x="365.76" y="129.54" size="2.032" layer="97" font="vector" align="top-left">USB 2.0 is not supported
 Peak USB current draw is 600mA</text>
-<text x="160.02" y="144.78" size="2.032" layer="97" font="vector" align="top-left">Vin Max: 5.5V
-Iout Max: 150mA
-Iq: 1.4µA Typ.
-Vdrop: 112mV Typ.</text>
+<text x="160.02" y="144.78" size="2.032" layer="97" font="vector" align="top-left">AP2112K-3.3
+Vin Max: 6.0V
+Iout Max: 600mA
+Iq: 55µA Typ.
+Vdrop: 5mV Typ. @ 10mA</text>
 </plain>
 <instances>
 <instance part="FRAME1" gate="G$1" x="0" y="0" smashed="yes"/>
@@ -13219,7 +13237,7 @@ Vdrop: 112mV Typ.</text>
 <attribute name="NAME" x="342.9" y="231.648" size="1.778" layer="95"/>
 <attribute name="VALUE" x="342.9" y="215.9" size="1.778" layer="96"/>
 </instance>
-<instance part="U3" gate="U1" x="170.18" y="160.02" smashed="yes">
+<instance part="U3" gate="G$1" x="170.18" y="160.02" smashed="yes">
 <attribute name="NAME" x="162.56" y="167.894" size="1.778" layer="95" font="vector"/>
 <attribute name="VALUE" x="162.56" y="152.146" size="1.778" layer="96" font="vector" align="top-left"/>
 </instance>
@@ -13427,7 +13445,7 @@ Vdrop: 112mV Typ.</text>
 <wire x1="337.82" y1="220.98" x2="337.82" y2="218.44" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="U3" gate="U1" pin="GND"/>
+<pinref part="U3" gate="G$1" pin="GND"/>
 <wire x1="160.02" y1="154.94" x2="157.48" y2="154.94" width="0.1524" layer="91"/>
 <pinref part="GND12" gate="1" pin="GND"/>
 <wire x1="157.48" y1="154.94" x2="157.48" y2="152.4" width="0.1524" layer="91"/>
@@ -13596,11 +13614,11 @@ Vdrop: 112mV Typ.</text>
 <wire x1="264.16" y1="223.52" x2="264.16" y2="226.06" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="U3" gate="U1" pin="IN"/>
+<pinref part="U3" gate="G$1" pin="IN"/>
 <wire x1="160.02" y1="165.1" x2="157.48" y2="165.1" width="0.1524" layer="91"/>
 <pinref part="SUPPLY14" gate="G$1" pin="VCC"/>
 <wire x1="157.48" y1="165.1" x2="157.48" y2="167.64" width="0.1524" layer="91"/>
-<pinref part="U3" gate="U1" pin="EN"/>
+<pinref part="U3" gate="G$1" pin="EN"/>
 <wire x1="160.02" y1="160.02" x2="157.48" y2="160.02" width="0.1524" layer="91"/>
 <wire x1="157.48" y1="160.02" x2="157.48" y2="165.1" width="0.1524" layer="91"/>
 <junction x="157.48" y="165.1"/>
@@ -13834,7 +13852,7 @@ Vdrop: 112mV Typ.</text>
 </net>
 <net name="3.3V" class="0">
 <segment>
-<pinref part="U3" gate="U1" pin="OUT"/>
+<pinref part="U3" gate="G$1" pin="OUT"/>
 <wire x1="177.8" y1="165.1" x2="180.34" y2="165.1" width="0.1524" layer="91"/>
 <pinref part="SUPPLY17" gate="G$1" pin="3.3V"/>
 <wire x1="180.34" y1="165.1" x2="180.34" y2="167.64" width="0.1524" layer="91"/>
