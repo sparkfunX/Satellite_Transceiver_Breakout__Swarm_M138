@@ -30,7 +30,7 @@ You will find the modem manual in the [**Documents**](./Documents) folder. It co
 
 You can also integrate the satellite transceiver directly into your project; the breakout pads can be used to provide power and access the 3.3V UART TX and RX signals.
 
-Open the two split pads on the bottom of the PCB first, located between the TXO/CH340_RXI and RXI/CH340_TXO pads. Then connect:
+Open the two split jumper pads on the bottom of the PCB first, located between the TXO/CH340_RXI and RXI/CH340_TXO pads. Then connect:
 * GND to GND on your Arduino board
 * VIN to 5V/V_USB on your Arduino board
 * TXO to RX on your Arduino board (3.3V only!)
