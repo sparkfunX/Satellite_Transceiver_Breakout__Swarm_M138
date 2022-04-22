@@ -1,14 +1,35 @@
 """
-A simple Python PyQt5 GUI for the Swarm M138 Modem
+A simple Python3 PyQt5 GUI for the Swarm M138 Modem
 
 Written by: Paul Clark, SparkFun
 Date: April 21st, 2022
+
+
+Please make sure you are using Python3. You will see a bunch of errors with Python2.
+
+To install PyQt5:
+
+  pip install PyQt5
+
+or
+
+  pip3 install PyQt5
+
+or
+
+  sudo apt-get install python3-pyqt5
+
+You may also need:
+
+  sudo apt-get install python3-pyqt5.qtserialport
+
 
 MIT license
 
 Please see the LICENSE.md for more details
 
 """
+
 from typing import Iterator, Tuple
 
 from PyQt5.QtCore import QSettings, QProcess, QTimer, Qt, QIODevice, pyqtSlot
@@ -21,7 +42,7 @@ from PyQt5.QtSerialPort import QSerialPort, QSerialPortInfo
 SETTING_PORT_NAME = 'COM1'
 SETTING_FILE_LOCATION = 'C:'
 
-guiVersion = 'V1.0'
+guiVersion = 'v1.0'
 
 def gen_serial_ports() -> Iterator[Tuple[str, str, str]]:
     """Return all available serial ports."""
@@ -99,14 +120,14 @@ class MainWidget(QWidget):
         self.terminal = QPlainTextEdit()
 
         # Messages Bar
-        self.messages_label = QLabel(self.tr('Warnings / Errors:'))
+        self.messages_label = QLabel(self.tr('Information / Warnings / Errors:'))
 
         # Messages Window
         self.messages = QPlainTextEdit()
 
         # Config Bar
         self.config_label = QLabel(self.tr('Message:'))
-        self.config_label_2 = QLabel(self.tr('(the $, * and checksum are added automatically)'))
+        self.config_label_2 = QLabel(self.tr('(The $, * and checksum are added automatically)'))
 
         # Config Window
         self.config = QPlainTextEdit()
@@ -163,9 +184,9 @@ class MainWidget(QWidget):
         self.rt_on_btn.clicked.connect(lambda: self.on_message_btn_pressed('RT 1'))
         self.rt_off_btn = QPushButton(self.tr('Receive Test Stop (RT 0)'))
         self.rt_off_btn.clicked.connect(lambda: self.on_message_btn_pressed('RT 0'))
-        self.td_btn = QPushButton(self.tr('Transmit Hello World! (TD)'))
+        self.td_btn = QPushButton(self.tr('Transmit Text - Hello World! (TD)'))
         self.td_btn.clicked.connect(lambda: self.on_message_btn_pressed('TD \"Hello World!\"'))
-        self.td_bin_btn = QPushButton(self.tr('Transmit Binary 00 01 02 03 04 05 (TD)'))
+        self.td_bin_btn = QPushButton(self.tr('Transmit Binary - 00 01 02 03 04 05 (TD)'))
         self.td_bin_btn.clicked.connect(lambda: self.on_message_btn_pressed('TD 000102030405'))
 
         # Arrange Layout
@@ -226,10 +247,9 @@ class MainWidget(QWidget):
 
         self.load_settings()
 
-        # Make the text edit windows read-only
+        # Make these text edit windows read-only
         self.terminal.setReadOnly(True)
         self.messages.setReadOnly(True)
-        #self.config.setReadOnly(True)
 
     def load_settings(self) -> None:
         """Load Qsettings on startup."""
@@ -269,13 +289,15 @@ class MainWidget(QWidget):
         self.update_com_ports()
 
     def on_message_btn_pressed(self, message) -> None:
-        """Paste the appropriate message"""
+        """Paste the appropriate message and send it"""
 
         self.config.clear() # Clear the config window
         self.config.moveCursor(QTextCursor.End)
         self.config.ensureCursorVisible()
         self.config.appendPlainText(message)
         self.config.ensureCursorVisible()
+        
+        self.on_send_message_btn_pressed()
 
     def on_clear_message_btn_pressed(self) -> None:
         """Clear the warnings / errors"""
@@ -293,16 +315,12 @@ class MainWidget(QWidget):
 
     def chksum_nmea(self, sentence):
         """Calculate the NMEA checksum"""
-        
         # Initializing our first XOR value
         csum = 0 
-        
         # For each char in chksumdata, XOR against the previous XOR'd char.
         # The final XOR of the last char will be our  checksum
-        
         for c in sentence:
             csum ^= ord(c)
-        
         return csum
 
     def on_send_message_btn_pressed(self) -> None:
@@ -453,7 +471,7 @@ class MainWidget(QWidget):
         if (portAvailable == True):
             self.messages.moveCursor(QTextCursor.End)
             self.messages.ensureCursorVisible()
-            self.messages.appendPlainText("Error: Port Is Already Open!")
+            self.messages.appendPlainText("Port Is Already Open!")
             self.messages.ensureCursorVisible()
             return
         
@@ -483,7 +501,7 @@ class MainWidget(QWidget):
         
         self.messages.moveCursor(QTextCursor.End)
         self.messages.ensureCursorVisible()
-        self.messages.appendPlainText("Port is now open.")
+        self.messages.appendPlainText("Port is now open")
         self.messages.ensureCursorVisible()
 
     @pyqtSlot()
@@ -574,7 +592,7 @@ class MainWidget(QWidget):
         if (portAvailable == False):
             self.messages.moveCursor(QTextCursor.End)
             self.messages.ensureCursorVisible()
-            self.messages.appendPlainText("Error: Port Is Already Closed!")
+            self.messages.appendPlainText("Port Is Already Closed!")
             self.messages.ensureCursorVisible()
             try:
                 self.ser.close()
@@ -594,7 +612,7 @@ class MainWidget(QWidget):
 
         self.messages.moveCursor(QTextCursor.End)
         self.messages.ensureCursorVisible()
-        self.messages.appendPlainText("Port is now closed.")
+        self.messages.appendPlainText("Port is now closed")
         self.messages.ensureCursorVisible()
 
     def on_start_logging_btn_pressed(self) -> None:
@@ -603,7 +621,7 @@ class MainWidget(QWidget):
         if (self.fileOpen == True):
             self.messages.moveCursor(QTextCursor.End)
             self.messages.ensureCursorVisible()
-            self.messages.appendPlainText("Error: File Is Already Open!")
+            self.messages.appendPlainText("File Is Already Open!")
             self.messages.ensureCursorVisible()
             return
 
@@ -622,7 +640,7 @@ class MainWidget(QWidget):
 
         self.messages.moveCursor(QTextCursor.End)
         self.messages.ensureCursorVisible()
-        self.messages.appendPlainText("File Open")
+        self.messages.appendPlainText("File open")
         self.messages.ensureCursorVisible()
 
     def on_stop_logging_btn_pressed(self) -> None:
@@ -631,7 +649,7 @@ class MainWidget(QWidget):
         if (self.fileOpen == False):
             self.messages.moveCursor(QTextCursor.End)
             self.messages.ensureCursorVisible()
-            self.messages.appendPlainText("Error: File Is Already Closed!")
+            self.messages.appendPlainText("File Is Already Closed!")
             self.messages.ensureCursorVisible()
             return
 
@@ -644,14 +662,14 @@ class MainWidget(QWidget):
 
         self.messages.moveCursor(QTextCursor.End)
         self.messages.ensureCursorVisible()
-        self.messages.appendPlainText("File Closed")
+        self.messages.appendPlainText("File closed")
         self.messages.ensureCursorVisible()
 
 if __name__ == '__main__':
     from sys import exit as sysExit
     app = QApplication([])
-    app.setOrganizationName('SparkX')
-    app.setApplicationName('Swarm M138 GUI ' + guiVersion)
+    app.setOrganizationName('SparkFun')
+    app.setApplicationName('Swarm M138 GUI - by SparkFun - ' + guiVersion)
     w = MainWidget()
     w.show()
     sysExit(app.exec_())
