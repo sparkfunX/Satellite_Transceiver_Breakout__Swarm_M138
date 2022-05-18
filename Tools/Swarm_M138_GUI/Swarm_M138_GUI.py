@@ -34,13 +34,15 @@ from typing import Iterator, Tuple
 
 from PyQt5.QtCore import QSettings, QProcess, QTimer, Qt, QIODevice, pyqtSlot
 from PyQt5.QtWidgets import QWidget, QLabel, QComboBox, QGridLayout, QPushButton, \
-    QApplication, QLineEdit, QFileDialog, QPlainTextEdit
-from PyQt5.QtGui import QCloseEvent, QTextCursor
+    QApplication, QLineEdit, QFileDialog, QPlainTextEdit, \
+    QAction, QActionGroup, QMenu, QMenuBar, QMainWindow
+from PyQt5.QtGui import QCloseEvent, QTextCursor, QIcon, QFont
 from PyQt5.QtSerialPort import QSerialPort, QSerialPortInfo
 
 # Setting constants
 SETTING_PORT_NAME = 'COM1'
 SETTING_FILE_LOCATION = 'C:'
+SETTING_TEXT_SIZE = '10'
 
 guiVersion = 'v1.0'
 
@@ -51,10 +53,10 @@ def gen_serial_ports() -> Iterator[Tuple[str, str, str]]:
 
 # noinspection PyArgumentList
 
-class MainWidget(QWidget):
-    """Main Widget."""
+class MainWindow(QMainWindow):
+    """Main Window."""
 
-    def __init__(self, parent: QWidget = None) -> None:
+    def __init__(self, parent: QMainWindow = None) -> None:
         super().__init__(parent)
  
         self.fileOpen = False
@@ -65,8 +67,8 @@ class MainWidget(QWidget):
         # File location line edit
         self.msg_label = QLabel(self.tr('Log File:'))
         self.fileLocation_lineedit = QLineEdit()
-        self.msg_label.setBuddy(self.msg_label)
-        #self.fileLocation_lineedit.setEnabled(False)
+        self.msg_label.setBuddy(self.fileLocation_lineedit)
+        self.fileLocation_lineedit.setEnabled(False)
         self.fileLocation_lineedit.returnPressed.connect(
             self.on_browse_btn_pressed)
 
@@ -133,8 +135,8 @@ class MainWidget(QWidget):
         self.config = QPlainTextEdit()
 
         # Message Labels
-        Messages_header = QLabel(self.tr('Pre-defined Messages:'))
-        Messages_header.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
+        self.Messages_header = QLabel(self.tr('Pre-defined Messages:'))
+        self.Messages_header.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
 
         self.cs_btn = QPushButton(self.tr('Configuration Settings (CS)'))
         self.cs_btn.clicked.connect(lambda: self.on_message_btn_pressed('CS'))
@@ -189,6 +191,42 @@ class MainWidget(QWidget):
         self.td_bin_btn = QPushButton(self.tr('Transmit Binary - 00 01 02 03 04 05 (TD)'))
         self.td_bin_btn.clicked.connect(lambda: self.on_message_btn_pressed('TD 000102030405'))
 
+        # Menu Bar
+        self.menubar = self.menuBar()
+        self.textSizeMenu = self.menubar.addMenu('Text Size')
+        
+        self.textSize14 = QAction("14", self)
+        self.textSize12 = QAction("12", self)
+        self.textSize10 = QAction("10", self)
+        self.textSize8 = QAction("8", self)
+        self.textSize6 = QAction("6", self)
+
+        # self.textSize14.checkable(True)
+        # self.textSize12.checkable(True)
+        # self.textSize10.checkable(True)
+        # self.textSize8.checkable(True)
+        # self.textSize6.checkable(True)
+
+        self.textSizeMenu.addAction(self.textSize14)
+        self.textSizeMenu.addAction(self.textSize12)
+        self.textSizeMenu.addAction(self.textSize10)
+        self.textSizeMenu.addAction(self.textSize8)
+        self.textSizeMenu.addAction(self.textSize6)
+
+        self.textSizeGroup = QActionGroup(self)
+
+        self.textSizeGroup.addAction(self.textSize14)
+        self.textSizeGroup.addAction(self.textSize12)
+        self.textSizeGroup.addAction(self.textSize10)
+        self.textSizeGroup.addAction(self.textSize8)
+        self.textSizeGroup.addAction(self.textSize6)
+
+        self.textSize14.triggered.connect(lambda: self.setTextSize('14'))
+        self.textSize12.triggered.connect(lambda: self.setTextSize('12'))
+        self.textSize10.triggered.connect(lambda: self.setTextSize('10'))
+        self.textSize8.triggered.connect(lambda: self.setTextSize('8'))
+        self.textSize6.triggered.connect(lambda: self.setTextSize('6'))
+
         # Arrange Layout
         
         layout = QGridLayout()
@@ -214,7 +252,7 @@ class MainWidget(QWidget):
         layout.addWidget(self.send_message_btn, 23, 2)
         layout.addWidget(self.config, 24, 0, 3, 3)
 
-        layout.addWidget(Messages_header, 0, 4)
+        layout.addWidget(self.Messages_header, 0, 4)
 
         layout.addWidget(self.cs_btn, 1, 4)
         layout.addWidget(self.dt_btn, 2, 4)
@@ -243,13 +281,116 @@ class MainWidget(QWidget):
         layout.addWidget(self.td_btn, 25, 4)
         layout.addWidget(self.td_bin_btn, 26, 4)
 
-        self.setLayout(layout)
+        widget = QWidget()
+        widget.setLayout(layout)
+        self.setCentralWidget(widget)
 
         self.load_settings()
 
         # Make these text edit windows read-only
         self.terminal.setReadOnly(True)
         self.messages.setReadOnly(True)
+
+    def setTextSize(self, size) -> None:
+        size = int(size)
+        self.msg_label.setFont(QFont('Arial',size))
+        self.fileLocation_lineedit.setFont(QFont('Arial',size))
+        self.browse_btn.setFont(QFont('Arial',size))
+        self.start_logging_btn.setFont(QFont('Arial',size))
+        self.stop_logging_btn.setFont(QFont('Arial',size))
+        self.port_label.setFont(QFont('Arial',size))
+        self.port_combobox.setFont(QFont('Arial',size))
+        self.refresh_btn.setFont(QFont('Arial',size))
+        self.open_port_btn.setFont(QFont('Arial',size))
+        self.close_port_btn.setFont(QFont('Arial',size))
+        self.send_message_btn.setFont(QFont('Arial',size))
+        self.clear_terminal_btn.setFont(QFont('Arial',size))
+        self.clear_message_btn.setFont(QFont('Arial',size))
+        self.terminal_label.setFont(QFont('Arial',size))
+        self.terminal.setFont(QFont('Arial',size))
+        self.messages_label.setFont(QFont('Arial',size))
+        self.messages.setFont(QFont('Arial',size))
+        self.config_label.setFont(QFont('Arial',size))
+        self.config_label_2.setFont(QFont('Arial',size))
+        self.config.setFont(QFont('Arial',size))
+        self.Messages_header.setFont(QFont('Arial',size))
+        self.cs_btn.setFont(QFont('Arial',size))
+        self.dt_btn.setFont(QFont('Arial',size))
+        self.fv_btn.setFont(QFont('Arial',size))
+        self.gj_btn.setFont(QFont('Arial',size))
+        self.gn_btn.setFont(QFont('Arial',size))
+        self.gs_btn.setFont(QFont('Arial',size))
+        self.gp_read_btn.setFont(QFont('Arial',size))
+        self.gp_mode_btn.setFont(QFont('Arial',size))
+        self.gp_mode1_btn.setFont(QFont('Arial',size))
+        self.gp_mode2_btn.setFont(QFont('Arial',size))
+        self.gp_mode5_btn.setFont(QFont('Arial',size))
+        self.gp_mode6_btn.setFont(QFont('Arial',size))
+        self.mm_count_btn.setFont(QFont('Arial',size))
+        self.mm_old_btn.setFont(QFont('Arial',size))
+        self.mm_new_btn.setFont(QFont('Arial',size))
+        self.mm_notify_on_btn.setFont(QFont('Arial',size))
+        self.mm_notify_off_btn.setFont(QFont('Arial',size))
+        self.mt_count_btn.setFont(QFont('Arial',size))
+        self.mt_delete_btn.setFont(QFont('Arial',size))
+        self.po_btn.setFont(QFont('Arial',size))
+        self.pw_btn.setFont(QFont('Arial',size))
+        self.rs_btn.setFont(QFont('Arial',size))
+        self.rt_on_btn.setFont(QFont('Arial',size))
+        self.rt_off_btn.setFont(QFont('Arial',size))
+        self.td_btn.setFont(QFont('Arial',size))
+        self.td_bin_btn.setFont(QFont('Arial',size))
+
+        self.msg_label.adjustSize()
+        self.fileLocation_lineedit.adjustSize()
+        self.browse_btn.adjustSize()
+        self.start_logging_btn.adjustSize()
+        self.stop_logging_btn.adjustSize()
+        self.port_label.adjustSize()
+        self.port_combobox.adjustSize()
+        self.refresh_btn.adjustSize()
+        self.open_port_btn.adjustSize()
+        self.close_port_btn.adjustSize()
+        self.send_message_btn.adjustSize()
+        self.clear_terminal_btn.adjustSize()
+        self.clear_message_btn.adjustSize()
+        self.terminal_label.adjustSize()
+        self.terminal.adjustSize()
+        self.messages_label.adjustSize()
+        self.messages.adjustSize()
+        self.config_label.adjustSize()
+        self.config_label_2.adjustSize()
+        self.config.adjustSize()
+        self.Messages_header.adjustSize()
+        self.cs_btn.adjustSize()
+        self.dt_btn.adjustSize()
+        self.fv_btn.adjustSize()
+        self.gj_btn.adjustSize()
+        self.gn_btn.adjustSize()
+        self.gs_btn.adjustSize()
+        self.gp_read_btn.adjustSize()
+        self.gp_mode_btn.adjustSize()
+        self.gp_mode1_btn.adjustSize()
+        self.gp_mode2_btn.adjustSize()
+        self.gp_mode5_btn.adjustSize()
+        self.gp_mode6_btn.adjustSize()
+        self.mm_count_btn.adjustSize()
+        self.mm_old_btn.adjustSize()
+        self.mm_new_btn.adjustSize()
+        self.mm_notify_on_btn.adjustSize()
+        self.mm_notify_off_btn.adjustSize()
+        self.mt_count_btn.adjustSize()
+        self.mt_delete_btn.adjustSize()
+        self.po_btn.adjustSize()
+        self.pw_btn.adjustSize()
+        self.rs_btn.adjustSize()
+        self.rt_on_btn.adjustSize()
+        self.rt_off_btn.adjustSize()
+        self.td_btn.adjustSize()
+        self.td_bin_btn.adjustSize()
+
+        self.repaint()
+
 
     def load_settings(self) -> None:
         """Load Qsettings on startup."""
@@ -265,12 +406,36 @@ class MainWidget(QWidget):
         if msg is not None:
             self.fileLocation_lineedit.setText(msg)
 
+        textSize = self.settings.value(SETTING_TEXT_SIZE)
+        if textSize is not None:
+            if textSize == '14':
+                self.textSize14.setChecked(True)
+            elif textSize == '12':
+                self.textSize12.setChecked(True)
+            elif textSize == '10':
+                self.textSize10.setChecked(True)
+            elif textSize == '8':
+                self.textSize8.setChecked(True)
+            elif textSize == '6':
+                self.textSize6.setChecked(True)
+            self.setTextSize(textSize)
+
     def save_settings(self) -> None:
         """Save Qsettings on shutdown."""
         self.settings = QSettings()
         self.settings.setValue(SETTING_PORT_NAME, self.port)
         self.settings.setValue(SETTING_FILE_LOCATION,
                           self.fileLocation_lineedit.text())
+        if self.textSize14.isChecked():
+            self.settings.setValue(SETTING_TEXT_SIZE, '14')
+        elif self.textSize12.isChecked():
+            self.settings.setValue(SETTING_TEXT_SIZE, '12')
+        elif self.textSize10.isChecked():
+            self.settings.setValue(SETTING_TEXT_SIZE, '10')
+        elif self.textSize8.isChecked():
+            self.settings.setValue(SETTING_TEXT_SIZE, '8')
+        elif self.textSize6.isChecked():
+            self.settings.setValue(SETTING_TEXT_SIZE, '6')
 
     def on_browse_btn_pressed(self) -> None:
         """Open dialog to select bin file."""
@@ -670,6 +835,6 @@ if __name__ == '__main__':
     app = QApplication([])
     app.setOrganizationName('SparkFun')
     app.setApplicationName('Swarm M138 GUI - by SparkFun - ' + guiVersion)
-    w = MainWidget()
+    w = MainWindow()
     w.show()
     sysExit(app.exec_())
