@@ -1,4 +1,4 @@
-panel size, 158x103mm
+panel size, 158x113mm
 PCB thickness, 1.6mm
 number of layers, 2
 soldermask color, Black

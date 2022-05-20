@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.05" altunitdist="inch" altunit="inch"/>
+<grid distance="2.5" unitdist="mm" unit="mm" style="lines" multiple="1" display="no" altdistance="0.5" altunitdist="mm" altunit="mm"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="no" active="no"/>
 <layer number="2" name="Route2" color="1" fill="3" visible="no" active="no"/>
@@ -12425,100 +12425,6 @@ Power Layers</text>
 <wire x1="-0.4" y1="6" x2="0" y2="6.7" width="0.0762" layer="51"/>
 <wire x1="0" y1="6.7" x2="0.4" y2="6" width="0.0762" layer="51"/>
 </package>
-</packages>
-<symbols>
-<symbol name="ANTENNA-GROUNDED">
-<description>&lt;h3&gt;Antenna (with ground termination)&lt;/h3&gt;</description>
-<wire x1="0" y1="2.54" x2="0" y2="0" width="0.1524" layer="94"/>
-<wire x1="-2.54" y1="5.08" x2="2.54" y2="5.08" width="0.254" layer="94"/>
-<wire x1="0" y1="2.54" x2="2.54" y2="5.08" width="0.254" layer="94"/>
-<wire x1="0" y1="2.54" x2="-2.54" y2="5.08" width="0.254" layer="94"/>
-<wire x1="1.27" y1="0" x2="2.54" y2="0" width="0.1524" layer="94"/>
-<circle x="0" y="0" radius="1.1359" width="0.254" layer="94"/>
-<text x="3.048" y="0" size="1.778" layer="95" font="vector">&gt;NAME</text>
-<text x="3.048" y="-2.286" size="1.778" layer="96" font="vector">&gt;VALUE</text>
-<pin name="GND" x="2.54" y="-2.54" visible="off" length="short" rot="R90"/>
-<pin name="SIGNAL" x="0" y="-2.54" visible="off" length="short" rot="R90"/>
-</symbol>
-</symbols>
-<devicesets>
-<deviceset name="ANTENNA-SMA-GROUNDED" prefix="E">
-<description>&lt;h3&gt;SMA Antenna Connector w/ Ground&lt;/h3&gt;
-&lt;p&gt;Edge-mount and SMD SMA connectors for RF Antennas.&lt;/p&gt;
-&lt;p&gt;
-&lt;h2&gt;&lt;i&gt;**4-LAYER BOARD WARNING!!**&lt;/i&gt;&lt;/h2&gt;
-&lt;/p&gt;
-&lt;p&gt;
-When designing a 4-layer board using any of the SMD variants, you will need to &lt;strong&gt;manually add a cutout polygon on any internal power layers&lt;/strong&gt; to make sure that you don't end up with exposed copper around the edge of the routed hole for these connectors. Exposed power copper could then short to the connector body - and that would be bad.
-&lt;/p&gt;
-&lt;p&gt;
-Why hasn't anyone added the cutout polygons directly to the connector footprint? Well, your internal layers (usually 2 and 15) may be covered with GND polygons and you might well want the copper to go all the way to the edge, especially under the connector SIGNAL pin. So adding cutouts to the footprint might make matters worse, not better...
-&lt;/p&gt;</description>
-<gates>
-<gate name="G$1" symbol="ANTENNA-GROUNDED" x="0" y="5.08"/>
-</gates>
-<devices>
-<device name="EDGE_SMA" package="SMA-EDGE">
-<connects>
-<connect gate="G$1" pin="GND" pad="GND@0 GND@1 GND@2 GND@3"/>
-<connect gate="G$1" pin="SIGNAL" pad="SIG"/>
-</connects>
-<technologies>
-<technology name="">
-<attribute name="PROD_ID" value="CONN-08289" constant="no"/>
-</technology>
-</technologies>
-</device>
-<device name="EDGE_SMA_SMD" package="SMA-EDGE-SMD">
-<connects>
-<connect gate="G$1" pin="GND" pad="GND@0 GND@1"/>
-<connect gate="G$1" pin="SIGNAL" pad="SIG"/>
-</connects>
-<technologies>
-<technology name="">
-<attribute name="PROD_ID" value="CONN-15100" constant="no"/>
-</technology>
-</technologies>
-</device>
-<device name="EDGE_RPSMA" package="RP-SMA-EDGE">
-<connects>
-<connect gate="G$1" pin="GND" pad="GND@0 GND@1 GND@2 GND@3"/>
-<connect gate="G$1" pin="SIGNAL" pad="SIG"/>
-</connects>
-<technologies>
-<technology name="">
-<attribute name="PROD_ID" value="CONN-00827" constant="no"/>
-</technology>
-</technologies>
-</device>
-<device name="EDGE_RPSMA_SMD" package="RP-SMA-EDGE-SMD">
-<connects>
-<connect gate="G$1" pin="GND" pad="GND@0 GND@1"/>
-<connect gate="G$1" pin="SIGNAL" pad="SIG"/>
-</connects>
-<technologies>
-<technology name="">
-<attribute name="PROD_ID" value="CONN-15101" constant="no"/>
-</technology>
-</technologies>
-</device>
-<device name="_EDGE_RPSMA_THIN" package="RP-SMA-EDGE">
-<connects>
-<connect gate="G$1" pin="GND" pad="GND@0 GND@1 GND@2 GND@3"/>
-<connect gate="G$1" pin="SIGNAL" pad="SIG"/>
-</connects>
-<technologies>
-<technology name="">
-<attribute name="PROD_ID" value="CONN-16309" constant="no"/>
-</technology>
-</technologies>
-</device>
-</devices>
-</deviceset>
-</devicesets>
-</library>
-<library name="Swarm">
-<packages>
 <package name="M.2-SWARM-M138-A">
 <hole x="12.5" y="0" drill="1.1"/>
 <hole x="-12.5" y="0" drill="1.6"/>
@@ -12699,6 +12605,19 @@ Why hasn't anyone added the cutout polygons directly to the connector footprint?
 </package>
 </packages>
 <symbols>
+<symbol name="ANTENNA-GROUNDED">
+<description>&lt;h3&gt;Antenna (with ground termination)&lt;/h3&gt;</description>
+<wire x1="0" y1="2.54" x2="0" y2="0" width="0.1524" layer="94"/>
+<wire x1="-2.54" y1="5.08" x2="2.54" y2="5.08" width="0.254" layer="94"/>
+<wire x1="0" y1="2.54" x2="2.54" y2="5.08" width="0.254" layer="94"/>
+<wire x1="0" y1="2.54" x2="-2.54" y2="5.08" width="0.254" layer="94"/>
+<wire x1="1.27" y1="0" x2="2.54" y2="0" width="0.1524" layer="94"/>
+<circle x="0" y="0" radius="1.1359" width="0.254" layer="94"/>
+<text x="3.048" y="0" size="1.778" layer="95" font="vector">&gt;NAME</text>
+<text x="3.048" y="-2.286" size="1.778" layer="96" font="vector">&gt;VALUE</text>
+<pin name="GND" x="2.54" y="-2.54" visible="off" length="short" rot="R90"/>
+<pin name="SIGNAL" x="0" y="-2.54" visible="off" length="short" rot="R90"/>
+</symbol>
 <symbol name="SWARM_M138">
 <wire x1="-10.16" y1="7.62" x2="10.16" y2="7.62" width="0.254" layer="94"/>
 <wire x1="10.16" y1="7.62" x2="10.16" y2="-5.08" width="0.254" layer="94"/>
@@ -12715,6 +12634,79 @@ Why hasn't anyone added the cutout polygons directly to the connector footprint?
 </symbol>
 </symbols>
 <devicesets>
+<deviceset name="ANTENNA-SMA-GROUNDED" prefix="E">
+<description>&lt;h3&gt;SMA Antenna Connector w/ Ground&lt;/h3&gt;
+&lt;p&gt;Edge-mount and SMD SMA connectors for RF Antennas.&lt;/p&gt;
+&lt;p&gt;
+&lt;h2&gt;&lt;i&gt;**4-LAYER BOARD WARNING!!**&lt;/i&gt;&lt;/h2&gt;
+&lt;/p&gt;
+&lt;p&gt;
+When designing a 4-layer board using any of the SMD variants, you will need to &lt;strong&gt;manually add a cutout polygon on any internal power layers&lt;/strong&gt; to make sure that you don't end up with exposed copper around the edge of the routed hole for these connectors. Exposed power copper could then short to the connector body - and that would be bad.
+&lt;/p&gt;
+&lt;p&gt;
+Why hasn't anyone added the cutout polygons directly to the connector footprint? Well, your internal layers (usually 2 and 15) may be covered with GND polygons and you might well want the copper to go all the way to the edge, especially under the connector SIGNAL pin. So adding cutouts to the footprint might make matters worse, not better...
+&lt;/p&gt;</description>
+<gates>
+<gate name="G$1" symbol="ANTENNA-GROUNDED" x="0" y="5.08"/>
+</gates>
+<devices>
+<device name="EDGE_SMA" package="SMA-EDGE">
+<connects>
+<connect gate="G$1" pin="GND" pad="GND@0 GND@1 GND@2 GND@3"/>
+<connect gate="G$1" pin="SIGNAL" pad="SIG"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="PROD_ID" value="CONN-08289" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="EDGE_SMA_SMD" package="SMA-EDGE-SMD">
+<connects>
+<connect gate="G$1" pin="GND" pad="GND@0 GND@1"/>
+<connect gate="G$1" pin="SIGNAL" pad="SIG"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="PROD_ID" value="CONN-15100" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="EDGE_RPSMA" package="RP-SMA-EDGE">
+<connects>
+<connect gate="G$1" pin="GND" pad="GND@0 GND@1 GND@2 GND@3"/>
+<connect gate="G$1" pin="SIGNAL" pad="SIG"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="PROD_ID" value="CONN-00827" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="EDGE_RPSMA_SMD" package="RP-SMA-EDGE-SMD">
+<connects>
+<connect gate="G$1" pin="GND" pad="GND@0 GND@1"/>
+<connect gate="G$1" pin="SIGNAL" pad="SIG"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="PROD_ID" value="CONN-15101" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="_EDGE_RPSMA_THIN" package="RP-SMA-EDGE">
+<connects>
+<connect gate="G$1" pin="GND" pad="GND@0 GND@1 GND@2 GND@3"/>
+<connect gate="G$1" pin="SIGNAL" pad="SIG"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="PROD_ID" value="CONN-16309" constant="no"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
 <deviceset name="SWARM_M138_TRANSCEIVER" prefix="U">
 <description>&lt;b&gt;Swarm M138 Modem&lt;/b&gt;
 &lt;br&gt;&lt;br&gt;
@@ -12844,7 +12836,7 @@ Why hasn't anyone added the cutout polygons directly to the connector footprint?
 <part name="RX_LED" library="SparkFun-Jumpers" deviceset="JUMPER-SMT_2_NC_TRACE" device="_SILK" package3d_urn="urn:adsk.eagle:package:39281/1"/>
 <part name="C4" library="SparkFun-Capacitors" deviceset="100UF-POLAR" device="-25V-20%(ELEC)" value="100uF"/>
 <part name="C5" library="SparkFun-Capacitors" deviceset="100UF-POLAR" device="-25V-20%(ELEC)" value="100uF"/>
-<part name="U2" library="Swarm" deviceset="SWARM_M138_TRANSCEIVER" device="_MAIN"/>
+<part name="U2" library="SparkFun-RF" deviceset="SWARM_M138_TRANSCEIVER" device="_MAIN"/>
 <part name="U3" library="SparkFun-IC-Power" deviceset="V_REG_AP2112" device="K-3.3V" value="3.3V"/>
 <part name="SUPPLY14" library="SparkFun-PowerSymbols" deviceset="VCC" device=""/>
 <part name="GND12" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
@@ -12867,7 +12859,7 @@ Why hasn't anyone added the cutout polygons directly to the connector footprint?
 <sheets>
 <sheet>
 <plain>
-<text x="421.64" y="7.62" size="2.54" layer="94" font="vector">x02</text>
+<text x="421.64" y="7.62" size="2.54" layer="94" font="vector">x03</text>
 <text x="350.52" y="10.16" size="2.54" layer="94" font="vector">Paul Clark</text>
 <text x="5.08" y="271.78" size="2.54" layer="94" font="vector">USB</text>
 <text x="134.62" y="271.78" size="2.54" layer="94" font="vector">Power Mux</text>
