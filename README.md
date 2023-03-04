@@ -1,8 +1,8 @@
 # Satellite Transceiver Breakout - Swarm M138
 
-[![Satellite Transceiver Breakout - Swarm M138](https://cdn.sparkfun.com//assets/parts/1/8/8/6/3/19236-Satellite_Transceiver_Breakout_-_Swarm_M138-05_HRc.jpg)](https://www.sparkfun.com/products/19236)
+[![SparkFun Satellite Transceiver Kit - Swarm M138](https://cdn.sparkfun.com//assets/parts/2/1/0/7/1/21218-Swarm-kit.jpg)](https://www.sparkfun.com/products/21287)
 
-[*Satellite Transceiver Breakout - Swarm M138*](https://www.sparkfun.com/products/19236)
+[*SparkFun Satellite Transceiver Kit - Swarm M138*](https://www.sparkfun.com/products/21287)
 
 A breakout for the Swarm M138 satellite transceiver.
 
@@ -35,8 +35,8 @@ Our [Swarm Satellite Arduino Library](https://github.com/sparkfun/SparkFun_Swarm
 
 ## Product Versions
 
-- [SPX-19236](https://www.sparkfun.com/products/19236) - Original SparkX version.
-- [KIT-21287](https://www.sparkfun.com/products/21287) - SparkFun version
+- [KIT-21287](https://www.sparkfun.com/products/21287) - SparkFun Satellite Transceiver Kit - Swarm M138
+- [SPX-19236](https://www.sparkfun.com/products/19236) - Original SparkX version
 
 ## License Information
 
