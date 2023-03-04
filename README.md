@@ -8,23 +8,8 @@ A breakout for the Swarm M138 satellite transceiver.
 
 This breakout allows you to power and communicate with the Swarm M138 using USB 3 or USB-C, or breakout pins.
 
-We've written a Python3 PyQt5 GUI to let you communicate with the modem. You will find the Python code in the [**Tools**](./Tools/Swarm_M138_GUI) folder.
-
-We've created executables for Windows and Raspberry Pi:
-* On Windows:
-  * Follow [this link](https://github.com/sparkfunX/Satellite_Transceiver_Breakout__Swarm_M138/raw/main/Tools/Swarm_M138_GUI/Windows%20exe/Swarm_M138_GUI.exe) to download the executable
-  * Run Swarm_M138_GUI.exe from File Explorer or a Command Prompt window
-* On Raspberry Pi:
-  * Follow [this link](https://github.com/sparkfunX/Satellite_Transceiver_Breakout__Swarm_M138/raw/main/Tools/Swarm_M138_GUI/Raspberry%20Pi%20exe/Swarm_M138_GUI) to download the executable
-  * Open a terminal window
-  * cd Downloads
-  * sudo chmod 755 Swarm_M138_GUI
-  * ./Swarm_M138_GUI
-
-Don't panic! The GUI will take a few seconds to open. Select the correct port from the drop-down list, click Open Port and away you go!
-
-Click any of the pre-defined message buttons to send that message to the modem. Or enter your own message in the Message window and click Send Message to send it.
-The $, * and checksum are added automatically. You do not need to include those.
+We've written a Python3 PyQt5 GUI to let you communicate with the modem. You will find it in its own dedicated repo:
+- [**SparkFun Swarm M138 GUI**](https://github.com/sparkfun/SparkFun_Swarm_M138_GUI)
 
 You will find the modem manual in the [**Documents**](./Documents) folder. It contains the full list of modem commands and messages.
 
@@ -42,8 +27,9 @@ Our [Swarm Satellite Arduino Library](https://github.com/sparkfun/SparkFun_Swarm
 
 - [**/Hardware**](./Hardware) - contains the Eagle PCB, SCH and LBR design files
 - [**/Documents**](./Documents) - contains the datasheet etc. for the Swarm M138
-- [**/Tools**](./Tools) - contains the Python3 PyQt5 Swarm_M138_GUI
 - [**LICENSE.md**](./LICENSE.md) - contains the licence information
+<br>
+- [**SparkFun Swarm M138 GUI**](https://github.com/sparkfun/SparkFun_Swarm_M138_GUI)
 
 ## Product Versions
 
