@@ -31,7 +31,7 @@ Our [Swarm Satellite Arduino Library](https://github.com/sparkfun/SparkFun_Swarm
 
 <br>
 
-- [**SparkFun Swarm M138 GUI**](https://github.com/sparkfun/SparkFun_Swarm_M138_GUI)
+- [**SparkFun Swarm M138 GUI**](https://github.com/sparkfun/SparkFun_Swarm_M138_GUI) - dedicated repo for the Swarm M138 GUI
 
 ## Product Versions
 
