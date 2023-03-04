@@ -35,7 +35,8 @@ Our [Swarm Satellite Arduino Library](https://github.com/sparkfun/SparkFun_Swarm
 
 ## Product Versions
 
-- [SPX-19236](https://www.sparkfun.com/products/19236) - Original SparkX Release.
+- [SPX-19236](https://www.sparkfun.com/products/19236) - Original SparkX version.
+- [KIT-21287](https://www.sparkfun.com/products/21287) - SparkFun version
 
 ## License Information
 
